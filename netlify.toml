@@ -1,4 +1,7 @@
+[build]
+  functions = "netlify/functions"
+
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
+  to = "/.netlify/functions/hello"
   status = 200
