@@ -38,6 +38,11 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // ========== PUBLIC ROUTES ==========
+// Root health check for Render
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
@@ -172,10 +177,6 @@ app.get('/api/invoices', InvoiceController.getInvoices);
 app.post('/api/invoices', InvoiceController.createInvoice);
 app.put('/api/invoices/:id', InvoiceController.updateInvoice);
 app.delete('/api/invoices/:id', InvoiceController.deleteInvoice);
-
-
-
-
 
 // ========== LOAD SAMPLE DATA ==========
 app.post('/api/load-sample-data', authenticateToken, requireAdmin, async (req, res) => {
@@ -428,53 +429,32 @@ app.post('/api/load-sample-data', authenticateToken, requireAdmin, async (req, r
   }
 });
 
-
-
-
-
-
-
-// Start server
+// ========== START SERVER (FIXED FOR RENDER) ==========
 async function startServer() {
   try {
     await initializeDatabase();
-    app.listen(PORT, () => {
-      console.log(`🚀 Multi-tenant server running on http://localhost:${PORT}`);
-      console.log(`📝 API endpoints available at http://localhost:${PORT}/api`);
-      console.log(`\nPublic endpoints:`);
-      console.log(`  GET    /api/health`);
-      console.log(`  POST   /api/auth/send-login-otp`);
-      console.log(`  POST   /api/auth/verify-login-otp`);
-      console.log(`  POST   /api/auth/send-registration-otp`);
-      console.log(`  POST   /api/auth/verify-registration-otp`);
-      console.log(`  POST   /api/auth/resend-otp`);
-      console.log(`  POST   /api/auth/login (traditional)`);
-      console.log(`  POST   /api/companies/register`);
-      console.log(`\nProtected endpoints (require token):`);
-      console.log(`  GET    /api/company`);
-      console.log(`  GET    /api/users`);
-      console.log(`  POST   /api/users`);
-      console.log(`  GET    /api/projects`);
-      console.log(`  POST   /api/projects`);
-      console.log(`  GET    /api/workers`);
-      console.log(`  POST   /api/workers`);
-      console.log(`  GET    /api/worker-categories`);
-      console.log(`  POST   /api/worker-categories`);
-      console.log(`  GET    /api/expenses`);
-      console.log(`  POST   /api/expenses`);
-      console.log(`  GET    /api/income`);
-      console.log(`  POST   /api/income`);
-      console.log(`  GET    /api/payroll-records`);
-      console.log(`  POST   /api/payroll-records`);
-      console.log(`  GET    /api/approved-items`);
-      console.log(`  POST   /api/approved-items`);
-      console.log(`  GET    /api/suppliers`);
-      console.log(`  POST   /api/suppliers`);
+    // CRITICAL: '0.0.0.0' binding is required for Render
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📡 Health check: http://localhost:${PORT}/health`);
+      console.log(`📡 API health check: http://localhost:${PORT}/api/health`);
+      console.log(`🔐 Protected endpoints require authentication`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);
   }
 }
+
+// Graceful shutdown for Render
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, closing gracefully...');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received, closing gracefully...');
+  process.exit(0);
+});
 
 startServer();
