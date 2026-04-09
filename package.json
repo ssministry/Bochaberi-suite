@@ -1,0 +1,10 @@
+{
+  "name": "bochaberi-backend-netlify",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.18.2",
+    "serverless-http": "^3.2.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0"
+  }
+}
