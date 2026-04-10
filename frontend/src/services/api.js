@@ -22,11 +22,25 @@ class ApiService {
     };
   }
 
-  async request(endpoint, options = {}) {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      ...options,
-      headers: this.getHeaders()
-    });
+
+
+
+
+
+async request(endpoint, options = {}) {
+  // Hardcoded Render backend URL
+  const RENDER_URL = 'https://bochaberi-suite-2.onrender.com/api';
+  const response = await fetch(`${RENDER_URL}${endpoint}`, {
+    ...options,
+    headers: this.getHeaders()
+  });
+
+
+
+
+
+
+
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ error: 'Request failed' }));
