@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Pencil, Trash2, Shield, ShieldCheck, RefreshCw } from 'lucide-react';
-import api from '/services/api.js';
+import api from '@/services/api';
 
 const ALL_MODULES: { id: ModuleId; label: string }[] = [
   { id: 'dashboard', label: 'Dashboard' },

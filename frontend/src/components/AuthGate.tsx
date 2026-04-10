@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { HardHat, Mail, ArrowRight, CheckCircle2, Quote, Sparkles, TrendingUp, Clock, Shield, Building2, Users, Award } from 'lucide-react';
 import { Register } from '@/pages/Register';
 import { motion, AnimatePresence } from 'framer-motion';
-import api from '/services/api.js';
+import api from '@/services/api';
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const { authUser, fetchProjects, fetchIncome, fetchExpenses, fetchInvoices, fetchPurchaseOrders, fetchCompanySettings, fetchCurrencySettings } = useAppStore();

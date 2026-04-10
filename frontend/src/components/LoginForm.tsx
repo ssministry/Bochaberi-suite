@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '/services/api.js';
+import api from '../services/api';
 
 interface LoginFormProps {
   onLoginSuccess?: (user: any) => void;
