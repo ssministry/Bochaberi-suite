@@ -15,9 +15,9 @@ export function PaymentsTab() {
         const token = localStorage.getItem('token');
         
         const [quotationsRes, expensesRes, subsRes] = await Promise.all([
-          fetch('http://localhost:5000/api/quotations', { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch('http://localhost:5000/api/expenses', { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch('http://localhost:5000/api/subcontractors', { headers: { 'Authorization': `Bearer ${token}` } })
+          fetch('https://bochaberi-suite-2.onrender.com/api/quotations', { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch('https://bochaberi-suite-2.onrender.com/api/expenses', { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch('https://bochaberi-suite-2.onrender.com/api/subcontractors', { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
         
         let quotations = await quotationsRes.json();

@@ -31,7 +31,7 @@ export function CurrencySelector() {
 
   const loadCurrencies = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/currency/available', {
+      const response = await fetch('https://bochaberi-suite-2.onrender.com/api/currency/available', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();

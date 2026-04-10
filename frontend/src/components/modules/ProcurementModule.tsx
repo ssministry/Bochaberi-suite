@@ -324,7 +324,7 @@ function PurchaseOrdersTab() {
     try {
       const token = localStorage.getItem('token');
       
-      const response = await fetch(`http://localhost:5000/api/purchase-orders/${order.id}/status`, {
+      const response = await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -581,7 +581,7 @@ const printPurchaseOrder = (order) => {
     try {
       const token = localStorage.getItem('token');
       
-      const response = await fetch(`http://localhost:5000/api/purchase-orders/${order.id}/status`, {
+      const response = await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

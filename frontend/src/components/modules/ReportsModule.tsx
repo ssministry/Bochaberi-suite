@@ -106,7 +106,7 @@ function PnLReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -124,11 +124,11 @@ function PnLReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let income = await fetch('http://localhost:5000/api/income', {
+        let income = await fetch('https://bochaberi-suite-2.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -365,7 +365,7 @@ function ProjectReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -383,15 +383,15 @@ function ProjectReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let projectsData = await fetch('http://localhost:5000/api/projects', {
+        let projectsData = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let income = await fetch('http://localhost:5000/api/income', {
+        let income = await fetch('https://bochaberi-suite-2.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -626,7 +626,7 @@ function CashFlowReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -644,11 +644,11 @@ function CashFlowReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let income = await fetch('http://localhost:5000/api/income', {
+        let income = await fetch('https://bochaberi-suite-2.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -829,7 +829,7 @@ function ExpenseByCategoryReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -847,7 +847,7 @@ function ExpenseByCategoryReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -974,7 +974,7 @@ function VATReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -992,11 +992,11 @@ function VATReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let income = await fetch('http://localhost:5000/api/income', {
+        let income = await fetch('https://bochaberi-suite-2.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -1244,7 +1244,7 @@ function OrdersReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -1261,7 +1261,7 @@ function OrdersReport() {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        let orders = await fetch('http://localhost:5000/api/purchase-orders', {
+        let orders = await fetch('https://bochaberi-suite-2.onrender.com/api/purchase-orders', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -1396,7 +1396,7 @@ function StoresSummaryReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -1413,7 +1413,7 @@ function StoresSummaryReport() {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        let transactions = await fetch('http://localhost:5000/api/store-transactions', {
+        let transactions = await fetch('https://bochaberi-suite-2.onrender.com/api/store-transactions', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -1562,7 +1562,7 @@ function SiteDiaryReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -1579,7 +1579,7 @@ function SiteDiaryReport() {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        let entries = await fetch('http://localhost:5000/api/site-diary-entries', {
+        let entries = await fetch('https://bochaberi-suite-2.onrender.com/api/site-diary-entries', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -1739,10 +1739,10 @@ function SubcontractorsLedgerReport() {
       try {
         const token = localStorage.getItem('token');
         const [projectsRes, subsRes] = await Promise.all([
-          fetch('http://localhost:5000/api/projects', {
+          fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch('http://localhost:5000/api/subcontractors', {
+          fetch('https://bochaberi-suite-2.onrender.com/api/subcontractors', {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ]);
@@ -1763,15 +1763,15 @@ function SubcontractorsLedgerReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let quotations = await fetch('http://localhost:5000/api/quotations', {
+        let quotations = await fetch('https://bochaberi-suite-2.onrender.com/api/quotations', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let expenses = await fetch('http://localhost:5000/api/expenses', {
+        let expenses = await fetch('https://bochaberi-suite-2.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let allSubcontractors = await fetch('http://localhost:5000/api/subcontractors', {
+        let allSubcontractors = await fetch('https://bochaberi-suite-2.onrender.com/api/subcontractors', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
@@ -2060,7 +2060,7 @@ function IncomeLedgerReport() {
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
-        const projectsRes = await fetch('http://localhost:5000/api/projects', {
+        const projectsRes = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const projectsData = await projectsRes.json();
@@ -2078,11 +2078,11 @@ function IncomeLedgerReport() {
       try {
         const token = localStorage.getItem('token');
         
-        let income = await fetch('http://localhost:5000/api/income', {
+        let income = await fetch('https://bochaberi-suite-2.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         
-        let allProjects = await fetch('http://localhost:5000/api/projects', {
+        let allProjects = await fetch('https://bochaberi-suite-2.onrender.com/api/projects', {
           headers: { 'Authorization': `Bearer ${token}` }
         }).then(res => res.json());
         

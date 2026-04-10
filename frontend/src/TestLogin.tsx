@@ -10,7 +10,7 @@ export function TestLogin() {
   const sendOTP = async () => {
     setMessage('Sending...');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/send-login-otp', {
+      const res = await fetch('https://bochaberi-suite-2.onrender.com/api/auth/send-login-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, subdomain })
@@ -30,7 +30,7 @@ export function TestLogin() {
   const verifyOTP = async () => {
     setMessage('Verifying...');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/verify-login-otp', {
+      const res = await fetch('https://bochaberi-suite-2.onrender.com/api/auth/verify-login-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code: otpCode, subdomain })

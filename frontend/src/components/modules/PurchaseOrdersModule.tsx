@@ -112,7 +112,7 @@ export function PurchaseOrdersModule() {
   const handleStatusUpdate = async (order: PurchaseOrder, newStatus: string, newPaymentStatus?: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/purchase-orders/${order.id}/status`, {
+      const response = await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ export function PurchaseOrdersModule() {
     if (confirm('WARNING: This will permanently delete ALL purchase orders. This action cannot be undone. Continue?')) {
       const token = localStorage.getItem('token');
       for (const order of purchaseOrders) {
-        await fetch(`http://localhost:5000/api/purchase-orders/${order.id}`, {
+        await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });

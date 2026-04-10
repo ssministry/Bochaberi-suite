@@ -2447,14 +2447,14 @@ clearWorkersLedger: async () => {
     }
     
     // Get all payroll records from backend
-    const getResponse = await fetch('http://localhost:5000/api/payroll-records', {
+    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/payroll-records', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const payrollRecords = await getResponse.json();
     
     // Delete each payroll record from backend
     for (const record of payrollRecords) {
-      await fetch(`http://localhost:5000/api/payroll-records/${record.id}`, {
+      await fetch(`https://bochaberi-suite-2.onrender.com/api/payroll-records/${record.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2486,27 +2486,27 @@ clearStoresRecords: async () => {
     }
     
     // Get all store transactions from backend
-    const getResponse = await fetch('http://localhost:5000/api/store-transactions', {
+    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/store-transactions', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const transactions = await getResponse.json();
     
     // Delete each transaction
     for (const transaction of transactions) {
-      await fetch(`http://localhost:5000/api/store-transactions/${transaction.id}`, {
+      await fetch(`https://bochaberi-suite-2.onrender.com/api/store-transactions/${transaction.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
     }
     
     // Also clear supplies if needed
-    const suppliesResponse = await fetch('http://localhost:5000/api/supplies', {
+    const suppliesResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/supplies', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const supplies = await suppliesResponse.json();
     
     for (const supply of supplies) {
-      await fetch(`http://localhost:5000/api/supplies/${supply.id}`, {
+      await fetch(`https://bochaberi-suite-2.onrender.com/api/supplies/${supply.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2540,27 +2540,27 @@ clearPurchaseOrders: async () => {
     }
     
     // Get all purchase orders
-    const getResponse = await fetch('http://localhost:5000/api/purchase-orders', {
+    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/purchase-orders', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const orders = await getResponse.json();
     
     // Delete each purchase order
     for (const order of orders) {
-      await fetch(`http://localhost:5000/api/purchase-orders/${order.id}`, {
+      await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
     }
     
     // Also clear supplies if needed
-    const suppliesResponse = await fetch('http://localhost:5000/api/supplies', {
+    const suppliesResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/supplies', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const supplies = await suppliesResponse.json();
     
     for (const supply of supplies) {
-      await fetch(`http://localhost:5000/api/supplies/${supply.id}`, {
+      await fetch(`https://bochaberi-suite-2.onrender.com/api/supplies/${supply.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2609,7 +2609,7 @@ loadSampleData: async () => {
     console.log('Loading sample data from backend API...');
     const token = localStorage.getItem('token');
     
-    const response = await fetch('http://localhost:5000/api/load-sample-data', {
+    const response = await fetch('https://bochaberi-suite-2.onrender.com/api/load-sample-data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -2688,7 +2688,7 @@ resetAllData: async () => {
     for (const endpoint of endpoints) {
       try {
         // Get all items
-        const getResponse = await fetch(`http://localhost:5000${endpoint.url}`, {
+        const getResponse = await fetch(`https://bochaberi-suite-2.onrender.com${endpoint.url}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const items = await getResponse.json();
@@ -2697,7 +2697,7 @@ resetAllData: async () => {
         
         // Delete each item
         for (const item of items) {
-          await fetch(`http://localhost:5000${endpoint.url}/${item.id}`, {
+          await fetch(`https://bochaberi-suite-2.onrender.com${endpoint.url}/${item.id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });
