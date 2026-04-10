@@ -1,12 +1,5 @@
+// FORCE FRESH BUILD - APRIL 10 2026
 const API_URL = 'https://bochaberi-suite-2.onrender.com/api';
-
-
-
-
-
-
-
-
 
 class ApiService {
   constructor() {
