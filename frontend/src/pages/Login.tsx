@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '@/hooks/useAppStore';
 import { HardHat, Mail, ArrowRight, Sparkles, CheckCircle2, Quote, Shield, Building2, Users, Award, TrendingUp, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import api from '@/services/api';
+import api from '/services/api.js';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();

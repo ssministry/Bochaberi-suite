@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '@/services/api';
+import api from '/services/api.js';
 import { useAppStore } from '@/hooks/useAppStore';
 import { formatDate } from '@/lib/formatters';
 import { Button } from '@/components/ui/button';
