@@ -31,13 +31,39 @@ const { verifyTransporter } = require('./services/emailService');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Configure CORS for Netlify frontend
+const allowedOrigins = [
+  'https://bochaberi-suite-igmy.vercel.app',
+  'https://bochaberi-suite.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:8080'
+];
+
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.options('*', cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// ========== PUBLIC ROUTES ==========
+// ========== PUBLIC ROUTES (NO TOKEN REQUIRED) ==========
+console.log('✅ Registering PUBLIC routes...');
+
 // Root health check for Render
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
@@ -50,7 +76,7 @@ app.get('/api/health', (req, res) => {
 // Verify email service on startup
 verifyTransporter().catch(console.error);
 
-// OTP Authentication Routes
+// OTP Authentication Routes - MUST BE PUBLIC
 app.post('/api/auth/send-login-otp', otpController.sendLoginOTP);
 app.post('/api/auth/verify-login-otp', otpController.verifyLoginOTP);
 app.post('/api/auth/send-registration-otp', otpController.sendRegistrationOTP);
@@ -61,7 +87,7 @@ app.post('/api/auth/resend-otp', otpController.resendOTP);
 app.post('/api/auth/login', authController.login);
 app.post('/api/companies/register', companyController.registerCompany);
 
-// ========== PROTECTED ROUTES ==========
+// ========== PROTECTED ROUTES (TOKEN REQUIRED) ==========
 app.use('/api', authenticateToken, requireCompanyAccess);
 
 app.get('/api/auth/me', authController.getCurrentUser);
