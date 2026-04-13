@@ -9,7 +9,19 @@ function nextId(arr: { id: number }[]): number {
   return arr.length ? Math.max(...arr.map(x => x.id)) + 1 : 1;
 }
 
+
 const initTheme = storage.getTheme() as 'light' | 'dark';
+
+
+// Helper to get the base API URL for raw fetch calls
+const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/api$/, '');
+  }
+  return 'https://bochaberi-suite.onrender.com';
+};
+
+
 if (initTheme === 'dark') document.documentElement.classList.add('dark');
 
 // Load or seed - but projects will be fetched from API
@@ -2367,30 +2379,7 @@ updateCurrencySettings: async (settings) => {
   try {
     const updated = await api.updateCurrencySettings(settings);
     set({ currencySettings: updated });
-    // Update the formatter - NO AWAIT NEEDED, just call it
-    setCurrencySettings(updated);
-    // Refresh financial data to show new currency
-    await Promise.all([
-      get().fetchIncome(),
-      get().fetchExpenses(),
-      get().fetchInvoices(),
-      get().fetchPurchaseOrders()
-    ]);
-    return updated;
-  } catch (error) {
-    console.error('Failed to update currency settings:', error);
-    throw error;
-  }
-},
-
-
-
-updateCurrencySettings: async (settings) => {
-  try {
-    const updated = await api.updateCurrencySettings(settings);
-    set({ currencySettings: updated });
     // Update the formatter
-    const { setCurrencySettings } = await import('@/lib/formatters');
     setCurrencySettings(updated);
     // Refresh financial data to show new currency
     await Promise.all([
@@ -2405,7 +2394,6 @@ updateCurrencySettings: async (settings) => {
     throw error;
   }
 },
-
 
 
 // ========== SETTINGS ==========
@@ -2447,14 +2435,16 @@ clearWorkersLedger: async () => {
     }
     
     // Get all payroll records from backend
-    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/payroll-records', {
+    const getResponse = await fetch(`${getApiBaseUrl()}/api/payroll-records`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const payrollRecords = await getResponse.json();
     
     // Delete each payroll record from backend
     for (const record of payrollRecords) {
-      await fetch(`https://bochaberi-suite-2.onrender.com/api/payroll-records/${record.id}`, {
+
+      await fetch(`${getApiBaseUrl()}/api/payroll-records/${record.id}`, {
+
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2486,27 +2476,27 @@ clearStoresRecords: async () => {
     }
     
     // Get all store transactions from backend
-    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/store-transactions', {
+    const getResponse = await fetch(`${getApiBaseUrl()}/api/store-transactions`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const transactions = await getResponse.json();
     
     // Delete each transaction
     for (const transaction of transactions) {
-      await fetch(`https://bochaberi-suite-2.onrender.com/api/store-transactions/${transaction.id}`, {
+      await fetch(`${getApiBaseUrl()}/api/store-transactions/${transaction.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
     }
     
     // Also clear supplies if needed
-    const suppliesResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/supplies', {
+    const suppliesResponse = await fetch(`${getApiBaseUrl()}/api/supplies`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const supplies = await suppliesResponse.json();
     
     for (const supply of supplies) {
-      await fetch(`https://bochaberi-suite-2.onrender.com/api/supplies/${supply.id}`, {
+      await fetch(`${getApiBaseUrl()}/api/supplies/${supply.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2540,27 +2530,27 @@ clearPurchaseOrders: async () => {
     }
     
     // Get all purchase orders
-    const getResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/purchase-orders', {
+    const getResponse = await fetch(`${getApiBaseUrl()}/api/purchase-orders`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const orders = await getResponse.json();
     
     // Delete each purchase order
     for (const order of orders) {
-      await fetch(`https://bochaberi-suite-2.onrender.com/api/purchase-orders/${order.id}`, {
+      await fetch(`${getApiBaseUrl()}/api/purchase-orders/${order.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
     }
     
     // Also clear supplies if needed
-    const suppliesResponse = await fetch('https://bochaberi-suite-2.onrender.com/api/supplies', {
+    const suppliesResponse = await fetch(`${getApiBaseUrl()}/api/supplies`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const supplies = await suppliesResponse.json();
     
     for (const supply of supplies) {
-      await fetch(`https://bochaberi-suite-2.onrender.com/api/supplies/${supply.id}`, {
+      await fetch(`${getApiBaseUrl()}/api/supplies/${supply.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -2609,7 +2599,7 @@ loadSampleData: async () => {
     console.log('Loading sample data from backend API...');
     const token = localStorage.getItem('token');
     
-    const response = await fetch('https://bochaberi-suite-2.onrender.com/api/load-sample-data', {
+    const response = await fetch(`${getApiBaseUrl()}/api/load-sample-data`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -2688,7 +2678,7 @@ resetAllData: async () => {
     for (const endpoint of endpoints) {
       try {
         // Get all items
-        const getResponse = await fetch(`https://bochaberi-suite-2.onrender.com${endpoint.url}`, {
+        const getResponse = await fetch(`${getApiBaseUrl()}${endpoint.url}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const items = await getResponse.json();
@@ -2697,7 +2687,7 @@ resetAllData: async () => {
         
         // Delete each item
         for (const item of items) {
-          await fetch(`https://bochaberi-suite-2.onrender.com${endpoint.url}/${item.id}`, {
+          await fetch(`${getApiBaseUrl()}${endpoint.url}/${item.id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });
